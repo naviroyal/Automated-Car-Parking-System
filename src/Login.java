@@ -50,9 +50,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(25, 13, 13));
         jLabel1.setText("Admin ID");
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(13, 9, 9));
         jLabel2.setText("Password");
 
         jButton1.setBackground(new java.awt.Color(62, 57, 70));
