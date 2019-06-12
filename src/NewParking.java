@@ -71,15 +71,18 @@ public class NewParking extends javax.swing.JFrame {
     }
 
     jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+    jLabel5.setForeground(new java.awt.Color(18, 8, 8));
     jLabel5.setText("Brand");
 
     buttonGroup1.add(jRadioButton1);
     jRadioButton1.setText("Male");
 
     jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+    jLabel4.setForeground(new java.awt.Color(18, 8, 8));
     jLabel4.setText("Position");
 
     jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+    jLabel3.setForeground(new java.awt.Color(18, 8, 8));
     jLabel3.setText("Gender");
 
     jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "select", "BMW", "Audi", "Verna", "I20" }));
@@ -88,6 +91,7 @@ public class NewParking extends javax.swing.JFrame {
     jRadioButton2.setText("Female");
 
     jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+    jLabel7.setForeground(new java.awt.Color(18, 8, 8));
     jLabel7.setText("Parking Expiry");
 
     jTextField8.setEditable(false);
@@ -98,15 +102,19 @@ public class NewParking extends javax.swing.JFrame {
     });
 
     jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+    jLabel9.setForeground(new java.awt.Color(18, 8, 8));
     jLabel9.setText("Track No.");
 
     jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+    jLabel6.setForeground(new java.awt.Color(18, 8, 8));
     jLabel6.setText("Parking Issue");
 
     jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+    jLabel2.setForeground(new java.awt.Color(18, 8, 8));
     jLabel2.setText("Full Name");
 
     jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+    jLabel8.setForeground(new java.awt.Color(18, 8, 8));
     jLabel8.setText("Lap No.");
 
     jTextField9.setEditable(false);
@@ -190,6 +198,8 @@ public class NewParking extends javax.swing.JFrame {
     jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
     jButton2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+    jButton2.setForeground(new java.awt.Color(18, 8, 8));
+    jButton2.setIcon(new javax.swing.ImageIcon("/home/navdeep/NetBeansProjects/Automated Car Parking System/img/Parkingcars.jpg")); // NOI18N
     jButton2.setText("Park");
     jButton2.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,6 +208,8 @@ public class NewParking extends javax.swing.JFrame {
     });
 
     jButton3.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+    jButton3.setForeground(new java.awt.Color(18, 8, 8));
+    jButton3.setIcon(new javax.swing.ImageIcon("/home/navdeep/Downloads/Back (1).jpg")); // NOI18N
     jButton3.setText("Back");
     jButton3.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,6 +219,8 @@ public class NewParking extends javax.swing.JFrame {
 
     jButton1.setBackground(new java.awt.Color(70, 126, 194));
     jButton1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+    jButton1.setForeground(new java.awt.Color(18, 8, 8));
+    jButton1.setIcon(new javax.swing.ImageIcon("/home/navdeep/Downloads/clear-128.jpg")); // NOI18N
     jButton1.setText("Clear");
     jButton1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,10 +235,10 @@ public class NewParking extends javax.swing.JFrame {
         .addGroup(jPanel2Layout.createSequentialGroup()
             .addContainerGap()
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap())
+                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(22, Short.MAX_VALUE))
     );
     jPanel2Layout.setVerticalGroup(
         jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,6 +253,7 @@ public class NewParking extends javax.swing.JFrame {
     );
 
     jLabel10.setFont(new java.awt.Font("aakar", 1, 36)); // NOI18N
+    jLabel10.setForeground(new java.awt.Color(18, 8, 8));
     jLabel10.setText("Welcome to Car Parking");
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,15 +261,16 @@ public class NewParking extends javax.swing.JFrame {
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addGap(53, 53, 53)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(27, 27, 27)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel10)
-            .addGap(62, 62, 62))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(53, 53, 53)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(87, 87, 87)
+                    .addComponent(jLabel10)))
+            .addContainerGap(30, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
