@@ -1,3 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,15 +15,57 @@
  *
  * @author navdeep
  */
-public class Loading extends javax.swing.JFrame {
-
+public class Loading extends javax.swing.JFrame implements Runnable{
+      Connection conn;
+    ResultSet rs;
+    PreparedStatement pst;
+    int s=0;
+    Thread th;
     /**
      * Creates new form Loading
      */
     public Loading() {
+        super("Initialization");
         initComponents();
+        th=new Thread((Runnable)this);
     }
-
+    public void setUpLoading(){
+        setVisible(false);
+        th.start();
+    }
+    
+    public void run(){
+        try{
+            
+            for(int i=1;i<=200;i++)
+            {
+                s=s+1;
+                int m=jProgressBar1.getMaximum();
+                int v=jProgressBar1.getValue();
+                if(v<m)
+                {
+                    jProgressBar1.setValue(jProgressBar1.getValue()+1);
+                }
+                else
+                {
+                    i=201;
+                    setVisible(false);
+                    Parking ob=new Parking();
+                    ob.setVisible(true);
+                    
+                }
+                 Thread.sleep(100);
+            }
+            
+            
+        }
+        catch(Exception e)
+        {
+             JOptionPane.showMessageDialog(null,e);
+        }
+       
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,4 +195,9 @@ public class Loading extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
+
+//    @Override
+//    public void run() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 }

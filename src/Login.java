@@ -1,3 +1,10 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +17,15 @@
  */
 public class Login extends javax.swing.JFrame {
 
+    Connection conn;
+    ResultSet rs;
+    PreparedStatement pst;
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        conn=Javaconnect.ConnectDb();
     }
 
     /**
@@ -42,6 +53,11 @@ public class Login extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(18, 8, 8));
         jButton2.setIcon(new javax.swing.ImageIcon("/home/navdeep/NetBeansProjects/Automated Car Parking System/img/Parkingcars.jpg")); // NOI18N
         jButton2.setText("New Parking");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,7 +73,6 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(13, 9, 9));
         jLabel2.setText("Password");
 
-        jButton1.setBackground(new java.awt.Color(62, 57, 70));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jButton1.setForeground(new java.awt.Color(14, 4, 4));
         jButton1.setIcon(new javax.swing.ImageIcon("/home/navdeep/NetBeansProjects/Automated Car Parking System/img/quiy.jpg")); // NOI18N
@@ -134,7 +149,34 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String sql="select * from login where id=? and password=?";
+         try{
+          pst=conn.prepareStatement(sql);
+          pst.setString(1,jTextField1.getText());
+          pst.setString(2,jTextField2.getText());  
+          rs=pst.executeQuery();
+          if(rs.next())
+          {
+              rs.close();
+              pst.close();
+              
+              setVisible(false);
+              Loading ob=new Loading();
+              ob.setUpLoading();
+              ob.setVisible(true);
+          }
+         }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        NewParking ob=new NewParking();
+         ob.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,10 +189,11 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
