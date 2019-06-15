@@ -1,3 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +15,22 @@
  * @author navdeep
  */
 public class Map extends javax.swing.JFrame {
+     Connection conn;
+    ResultSet rs;
+    PreparedStatement pst;
+    /**
+     * Creates new form Parking
+     */
 
+       
     /**
      * Creates new form Map
      */
     public Map() {
         initComponents();
+         conn=Javaconnect.ConnectDb();
+         getData1();
+         getData2();
     }
 
     /**
@@ -44,6 +60,11 @@ public class Map extends javax.swing.JFrame {
 
         jButton1.setForeground(new java.awt.Color(18, 8, 8));
         jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -151,6 +172,77 @@ public class Map extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Parking ob=new Parking();
+        ob.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void getData1(){
+        String str="AVAIL";
+        try{
+            
+            String sql="select count(status) from laps where status='"+str+"'";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            if(rs.next())
+            {
+                String sum=rs.getString("count(status)");
+                jTextField1.setText(sum);
+            }
+            
+        }
+        catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }finally{
+        try
+        {
+            rs.close();
+            pst.close();  
+        }
+        catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }
+    }
+        
+}
+    
+    
+      public void getData2(){
+        String str="RESERVED";
+        try{
+            
+            String sql="select count(status) from laps where status='"+str+"'";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            if(rs.next())
+            {
+                String sum=rs.getString("count(status)");
+                jTextField2.setText(sum);
+            }
+            
+        }
+        catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }finally{
+        try
+        {
+            rs.close();
+            pst.close();  
+        }
+        catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }
+    }
+        
+}
+    
     /**
      * @param args the command line arguments
      */

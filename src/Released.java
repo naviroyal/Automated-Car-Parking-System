@@ -1,3 +1,13 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.MessageFormat;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import java.awt.print.*;
+import net.proteanit.sql.DbUtils;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +19,18 @@
  * @author navdeep
  */
 public class Released extends javax.swing.JFrame {
+      Connection conn;
+    ResultSet rs;
+    PreparedStatement pst;
 
     /**
      * Creates new form Released
      */
     public Released() {
         initComponents();
+        conn=Javaconnect.ConnectDb();
+        UpdateTable();
+        
     }
 
     /**
@@ -47,6 +63,11 @@ public class Released extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("aakar", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(18, 8, 8));
@@ -67,9 +88,19 @@ public class Released extends javax.swing.JFrame {
 
         jButton1.setForeground(new java.awt.Color(18, 8, 8));
         jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setForeground(new java.awt.Color(18, 8, 8));
         jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setForeground(new java.awt.Color(18, 8, 8));
         jButton3.setText("Exit");
@@ -251,7 +282,31 @@ public class Released extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(835, 522));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+     public void UpdateTable(){
+        try{
+                
+            String sql="select rc as RC, name as Name,issue as Park_dat,expiry as Release from released order by Name";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            
+            
+            }catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }finally{
+            try{
+                rs.close();
+                pst.close();
+            }catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }
+            }
+    }
+    
+    
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
@@ -262,11 +317,65 @@ public class Released extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        MessageFormat header=new MessageFormat("Report Print");
+        MessageFormat footer=new MessageFormat("Page{0,number,integer}");
+        try{
+            jTable1.print(JTable.PrintMode.NORMAL,header,footer);
+            
+            
+        }
+        catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }  
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here
+        
+        int row=jTable1.getSelectedRow();
+        String Table_click=(jTable1.getModel().getValueAt(row,0).toString());
+        try{
+            
+            String sql="select * from released where rc='"+Table_click+"'";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+                if(rs.next())
+                {
+                    String add1=rs.getString("rc");
+                    jTextField1.setText(add1);
+                    String add2=rs.getString("name");
+                    jTextField2.setText(add2);
+                    String add3=rs.getString("totalday");
+                    jTextField3.setText(add3);
+                     String add4=rs.getString("paid");
+                    jTextField4.setText(add4);
+                 }
+            }
+        catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }                              
+    }//GEN-LAST:event_formMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Parking ob=new Parking();
+        ob.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         setVisible(false);
+        Login ob=new Login();
+        ob.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

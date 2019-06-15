@@ -372,7 +372,7 @@ public class NewParking extends javax.swing.JFrame {
             pst.setString(1,jTextField1.getText());
             pst.setString(2,jTextField2.getText());
             jRadioButton1.setActionCommand("Male");
-            jRadioButton1.setActionCommand("Female");
+            jRadioButton2.setActionCommand("Female");
             pst.setString(3,buttonGroup1.getSelection().getActionCommand());
             pst.setString(4,jTextField3.getText());
             pst.setString(5,(String)jComboBox1.getSelectedItem());

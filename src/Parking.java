@@ -243,6 +243,11 @@ public class Parking extends javax.swing.JFrame {
         jButton3.setForeground(new java.awt.Color(18, 8, 8));
         jButton3.setIcon(new javax.swing.ImageIcon("/home/navdeep/NetBeansProjects/Automated Car Parking System/img/mappark.jpg")); // NOI18N
         jButton3.setText("Map");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setForeground(new java.awt.Color(18, 8, 8));
         jButton4.setIcon(new javax.swing.ImageIcon("/home/navdeep/NetBeansProjects/Automated Car Parking System/img/clee.jpg")); // NOI18N
@@ -422,6 +427,12 @@ public class Parking extends javax.swing.JFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("aakar", 0, 24), new java.awt.Color(18, 8, 8))); // NOI18N
         jPanel7.setForeground(new java.awt.Color(18, 8, 8));
 
+        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField7KeyReleased(evt);
+            }
+        });
+
         jLabel12.setForeground(new java.awt.Color(18, 8, 8));
         jLabel12.setText("Search By Name");
 
@@ -455,6 +466,11 @@ public class Parking extends javax.swing.JFrame {
 
         jButton8.setForeground(new java.awt.Color(18, 8, 8));
         jButton8.setText("Count");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -604,9 +620,24 @@ public class Parking extends javax.swing.JFrame {
             {
                JOptionPane.showMessageDialog(null, e); 
             }
+            }
     }
-}
-    public void updateDate(){
+    
+    public void UpdateData1(){
+         try{
+            String a1=jTextField4.getText();
+            String a2=jTextField5.getText();
+            pst=conn.prepareStatement("update laps set status='"+str+"' where lapn='"+a1+"' and trackn='"+a2+"'");
+            pst.executeUpdate();
+            
+        }
+        catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }
+    }
+    
+    public void updateData(){
         try{
             String a1=jTextField4.getText();
             String a2=jTextField5.getText();
@@ -627,19 +658,15 @@ public class Parking extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:\
+    public void rel(){
+           
         try{
-            String sql="insert into parked(rc,name,gender,position,brand,issue,expiry,lapn,trackn) values (?,?,?,?,?,?,?,?,?)";
+            String sql="insert into released(rc,name,gender,position,brand,issue,expiry,lapn,trackn) values (?,?,?,?,?,?,?,?,?)";
             pst=conn.prepareStatement(sql);
             pst.setString(1,jTextField1.getText());
             pst.setString(2,jTextField2.getText());
             jRadioButton1.setActionCommand("Male");
-            jRadioButton1.setActionCommand("Female");
+            jRadioButton2.setActionCommand("Female");
             pst.setString(3,buttonGroup1.getSelection().getActionCommand());
             pst.setString(4,jTextField3.getText());
             pst.setString(5,(String)jComboBox1.getSelectedItem());
@@ -650,7 +677,64 @@ public class Parking extends javax.swing.JFrame {
             pst.setString(8,jTextField4.getText());
             pst.setString(9,jTextField5.getText());
             pst.executeUpdate();
-            updateDate();
+        }
+         catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }
+        
+    }
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+//        int p=JOptionPane.showConfirmDialog(null,"Are You Sure?","Release" JOptionPane.YES_NO_OPTION);
+        
+int p=JOptionPane.showConfirmDialog(null,"Are you sure", "Release", JOptionPane.YES_NO_OPTION);
+  if(p==0)
+  {
+      String sql="delete from parked where rc=?";
+      try{
+          pst=conn.prepareStatement(sql);
+          pst.setString(1,jTextField1.getText());
+          pst.execute();
+          rel();
+          UpdateData1();
+          price();
+          clear();
+          UpdateTable();
+          JOptionPane.showMessageDialog(null,"Released");
+          
+      }
+       catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }
+      
+  }      
+  
+  
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:\
+        try{
+            String sql="insert into parked(rc,name,gender,position,brand,issue,expiry,lapn,trackn) values (?,?,?,?,?,?,?,?,?)";
+            pst=conn.prepareStatement(sql);
+            pst.setString(1,jTextField1.getText());
+            pst.setString(2,jTextField2.getText());
+            jRadioButton1.setActionCommand("Male");
+            jRadioButton2.setActionCommand("Female");
+            pst.setString(3,buttonGroup1.getSelection().getActionCommand());
+            pst.setString(4,jTextField3.getText());
+            pst.setString(5,(String)jComboBox1.getSelectedItem());
+            String var1 =((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText();
+            pst.setString(6, var1);
+            String var2 =((JTextField)jDateChooser2.getDateEditor().getUiComponent()).getText();
+            pst.setString(7, var2);
+            pst.setString(8,jTextField4.getText());
+            pst.setString(9,jTextField5.getText());
+            pst.executeUpdate();
+            updateData();
             UpdateTable();
             JOptionPane.showMessageDialog(null,"car parked");
 
@@ -660,6 +744,17 @@ public class Parking extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void clear(){
+          jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)jDateChooser2.getDateEditor().getUiComponent()).setText("");
+  
+    }
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
@@ -738,6 +833,118 @@ public class Parking extends javax.swing.JFrame {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jTextField7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyReleased
+        // TODO add your handling code here:
+        try{
+            String sql="select * from parked where name=?";
+            pst=conn.prepareStatement(sql);
+            pst.setString(1,jTextField7.getText());
+            rs=pst.executeQuery();
+            if(rs.next())
+            {
+                 String add1=rs.getString("rc");
+                    jTextField1.setText(add1);
+                    String add2=rs.getString("name");
+                    jTextField2.setText(add2);
+                    String add3=rs.getString("position");
+                    jTextField3.setText(add3);
+                    String add4=rs.getString("gender");
+                    if(add4.equals("Male")){
+                        jRadioButton1.setSelected(true);
+                    }
+                    else
+                    {
+                        jRadioButton2.setSelected(true);
+                    }
+
+                    String add5=rs.getString("issue");
+                     ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).setText(add5);
+
+                    String add6=rs.getString("expiry");
+                     ((JTextField)jDateChooser2.getDateEditor().getUiComponent()).setText(add6);
+
+                    String add7=rs.getString("lapn");
+                    jTextField4.setText(add7);
+                    String add8=rs.getString("trackn");
+                    jTextField5.setText(add8);
+                    status();
+                
+            }
+        }
+        catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }
+        
+    }//GEN-LAST:event_jTextField7KeyReleased
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        // TODO add your handling code here:
+        
+        try{
+          String sql="select count(name) from parked";
+          pst=conn.prepareStatement(sql);
+          rs=pst.executeQuery();
+          if(rs.next())
+          {
+              String sum=rs.getString("count(name)");
+              jTextField8.setText(sum);           
+          }        
+            
+        }
+        catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }
+        
+        
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Map ob=new Map();
+        ob.setVisible(true);
+           
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+    
+    public void price(){
+        JTextField t1=new JTextField();
+        JTextField t2=new JTextField();
+        
+        String a1=((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText();
+        Format formatter=new SimpleDateFormat("MMM dd,yyyy");
+        String s=formatter.format(new java.util.Date());
+        SimpleDateFormat myFormat=new SimpleDateFormat("MMM dd,yyyy");
+        try{
+            java.util.Date date1=myFormat.parse(a1);
+            java.util.Date date2=myFormat.parse(s);
+            long diff=date2.getTime()-date1.getTime();
+            t1.setText(""+TimeUnit.DAYS.convert(diff,TimeUnit.MILLISECONDS));
+            String aw=t1.getText();
+            int a5=Integer.parseInt(aw);
+            int tot=a5*3;
+            String at=Integer.toString(tot);
+            
+            try{
+                String rec=jTextField1.getText();
+                String sql="update released set totalday='"+aw+"',paid='"+at+"' where rc='"+rec+"'";
+                pst=conn.prepareStatement(sql);
+                pst.execute();
+            }catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, e); 
+            }
+        }
+        catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+    }
+    
+    
     
     public void status(){
         try{
