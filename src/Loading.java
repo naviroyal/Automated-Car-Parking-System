@@ -54,7 +54,7 @@ public class Loading extends javax.swing.JFrame implements Runnable{
                     ob.setVisible(true);
                     
                 }
-                 Thread.sleep(100);
+                 Thread.sleep(40);
             }
             
             

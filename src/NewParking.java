@@ -132,9 +132,9 @@ public class NewParking extends javax.swing.JFrame {
 
         jTextField5.setEditable(false);
 
-        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+        jDateChooser1.setDateFormatString("MMM dd,yyyy");
 
-        jDateChooser2.setDateFormatString("yyyy-MM-dd");
+        jDateChooser2.setDateFormatString("MMM dd,yyyy");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
